@@ -17,9 +17,10 @@ export function ThemeClient({ children, serverTheme }: { children: React.ReactNo
   }, [isDark]);
 
   const toggleTheme = () => setIsDark(prev => !prev);
+
   const themeObject = isDark ? darkTheme : lightTheme;
   const { data: session, status } = useSession();
-  const isAuthenticated = status === 'authenticated' && session?.user;
+  const isAuthenticated = status === 'authenticated' && !!session?.user;
 
   return (
     <ThemeContext.Provider value={{ isDark, toggleTheme }}>
@@ -27,7 +28,7 @@ export function ThemeClient({ children, serverTheme }: { children: React.ReactNo
         <GlobalStyle />
         {isAuthenticated && <Header isDark={isDark} toggleTheme={toggleTheme} />}
         <main>{children}</main>
-        {isAuthenticated && <Footer />}
+        <Footer />
       </ThemeProvider>
     </ThemeContext.Provider>
   );

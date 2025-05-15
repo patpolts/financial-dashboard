@@ -1,20 +1,14 @@
-import { cookies } from 'next/headers';
-import { ReactNode } from 'react';
-import { SessionProvider } from 'next-auth/react';
-import { ThemeClient } from '@components/ThemeClient';
+import { getServerSession } from 'next-auth/next';
+// import { authOptions } from '@lib/auth/auth-options';
 
-export default async function RootLayout({ children }: { children: ReactNode }) {
-  const cookieStore = await cookies();
-  const theme = cookieStore.get('theme')?.value ?? 'light';
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // const session = await getServerSession(authOptions);
 
+  
   return (
-    <html lang="pt-BR" data-theme={theme}>
+    <html lang="pt-BR">
       <body>
-        <SessionProvider>
-          <ThemeClient serverTheme={theme}>
-            {children}
-          </ThemeClient>
-        </SessionProvider>
+        {children}
       </body>
     </html>
   );

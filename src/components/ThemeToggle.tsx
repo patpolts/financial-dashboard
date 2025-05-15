@@ -7,9 +7,6 @@ export function ThemeToggle() {
   const { isDark, toggleTheme } = useThemeContext();
 
   return (
-    <ThemeSwitch
-      checked={isDark}
-      onCheckedChange={toggleTheme}
-    />
+    <ThemeSwitch checked={isDark} onCheckedChange={toggleTheme} />
   );
 }
