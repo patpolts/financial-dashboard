@@ -1,26 +1,21 @@
-import './globals.css';
-import { Inter } from 'next/font/google';
-import  AuthProvider  from '@components/AuthProvider';
+import { cookies } from 'next/headers';
+import { ReactNode } from 'react';
+import { SessionProvider } from 'next-auth/react';
+import { ThemeClient } from '@components/ThemeClient';
 
-const inter = Inter({ subsets: ['latin'] })
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const cookieStore = await cookies();
+  const theme = cookieStore.get('theme')?.value ?? 'light';
 
-export const metadata = {
-  title: 'Dashboard App',
-  description: 'Finance dashboard',
-}
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <AuthProvider>
-          {children}
-        </AuthProvider>
+    <html lang="pt-BR" data-theme={theme}>
+      <body>
+        <SessionProvider>
+          <ThemeClient serverTheme={theme}>
+            {children}
+          </ThemeClient>
+        </SessionProvider>
       </body>
     </html>
-  )
+  );
 }
