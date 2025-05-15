@@ -2,6 +2,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import { ThemeSwitch } from './ui/ThemeSwitch';
 
 interface HeaderProps {
   isDark: boolean;
@@ -35,9 +36,7 @@ export default function Header({ isDark, toggleTheme }: HeaderProps) {
   return (
     <HeaderContainer>
       <h1>Dashboard Financeiro</h1>
-      <Button onClick={toggleTheme}>
-        {isDark ? 'Modo Claro' : 'Modo Escuro'}
-      </Button>
+      <ThemeSwitch checked={isDark} onCheckedChange={toggleTheme} />
     </HeaderContainer>
   );
 }

@@ -1,8 +1,10 @@
-export default function HomePage() {
-  return (
-    <section style={{ padding: '2rem' }}>
-      <h1>Bem-vindo</h1>
-      <p>Este é o início do seu dashboard.</p>
-    </section>
-  );
+import { redirect } from "next/navigation";
+import { getAuthSession } from "@libs/auth";
+
+export default async function HomePage() {
+  const session = await getAuthSession();
+
+  if(session?.user) redirect('/dashboard');
+
+  redirect('/login');
 }

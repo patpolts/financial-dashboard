@@ -1,20 +1,26 @@
-import type { Metadata } from 'next';
-import { ReactNode } from 'react';
-import { ThemeClient } from '@components/ThemeClient';
+import './globals.css';
+import { Inter } from 'next/font/google';
+import  AuthProvider  from '@components/AuthProvider';
 
-export const metadata: Metadata = {
-  title: 'Dashboard Financeiro',
-  description: 'Controle e análise das suas finanças',
-};
+const inter = Inter({ subsets: ['latin'] })
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export const metadata = {
+  title: 'Dashboard App',
+  description: 'Finance dashboard',
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html lang="pt-BR">
-      <body>
-        <ThemeClient>
+    <html lang="en">
+      <body className={inter.className}>
+        <AuthProvider>
           {children}
-        </ThemeClient>
+        </AuthProvider>
       </body>
     </html>
-  );
+  )
 }

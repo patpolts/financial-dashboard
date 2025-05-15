@@ -1,14 +1,15 @@
-// src/components/ThemeToggle.tsx
-'use client'
+'use client';
 
-import { useTheme } from '@context/ThemeContext'
+import { useThemeContext } from '@context/ThemeContext';
+import { ThemeSwitch } from './ui/ThemeSwitch';
 
-export const ThemeToggle = () => {
-  const { theme, toggleTheme } = useTheme()
+export function ThemeToggle() {
+  const { isDark, toggleTheme } = useThemeContext();
 
   return (
-    <button onClick={toggleTheme}>
-      Tema: {theme === 'light' ? '🌞' : '🌙'}
-    </button>
-  )
+    <ThemeSwitch
+      checked={isDark}
+      onCheckedChange={toggleTheme}
+    />
+  );
 }
