@@ -4,8 +4,8 @@ import * as Select from '@radix-ui/react-select';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
 import styled from 'styled-components';
 import { Transaction } from 'types/transaction';
+import type { FiltersType } from 'types/filter';
 
-// Layout
 const FilterContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -25,7 +25,6 @@ const Label = styled.label`
   color: ${({ theme }) => theme.colors.secondary};
 `;
 
-// Radix Styled
 const Trigger = styled(Select.Trigger)`
   display: flex;
   justify-content: space-between;
@@ -82,14 +81,20 @@ export const Filters = ({
   onFilterChange,
 }: {
   transactions: Transaction[];
-  filters: { year: string; month: string; type: string };
-  onFilterChange: (filter: Partial<typeof filters>) => void;
+  filters: FiltersType;
+  onFilterChange: (filter: Partial<FiltersType>) => void;
 }) => {
   const years = Array.from(new Set(transactions.map((t) => new Date(t.date).getFullYear())))
     .sort()
     .map((year) => ({ label: String(year), value: String(year) }));
 
-  const months = [
+  const accounts = Array.from(new Set(transactions.map((t) => t.account))).sort();
+  const industries = Array.from(new Set(transactions.map((t) => t.industry))).sort();
+  const states = Array.from(new Set(transactions.map((t) => t.state))).sort();
+
+  const yearOptions = [{ label: 'Todos', value: 'all' }, ...years.map((year) => ({ label: year.label, value: year.value }))];
+  const monthOptions = [
+    { label: 'Todos', value: 'all' },
     { value: '01', label: 'Janeiro' },
     { value: '02', label: 'Fevereiro' },
     { value: '03', label: 'Março' },
@@ -104,35 +109,24 @@ export const Filters = ({
     { value: '12', label: 'Dezembro' },
   ];
 
-  const types = [
+  const typeOptions = [
+    { label: 'Todos', value: 'all' },
     { value: 'deposit', label: 'Receitas' },
     { value: 'withdraw', label: 'Despesas' },
   ];
 
-  const yearOptions = [{ label: 'Todos', value: 'all' }, ...years];
-  const monthOptions = [{ label: 'Todos', value: 'all' }, ...months];
-  const typeOptions = [{ label: 'Todos', value: 'all' }, ...types];
+  const accountOptions = [{ label: 'Todos', value: 'all' }, ...accounts.map((a) => ({ label: a, value: a }))];
+  const industryOptions = [{ label: 'Todos', value: 'all' }, ...industries.map((i) => ({ label: i, value: i }))];
+  const stateOptions = [{ label: 'Todos', value: 'all' }, ...states.map((s) => ({ label: s, value: s }))];
 
   return (
     <FilterContainer>
-      <SelectDropdown
-        label="Ano"
-        options={yearOptions}
-        value={filters.year}
-        onChange={(val) => onFilterChange({ year: val })}
-      />
-      <SelectDropdown
-        label="Mês"
-        options={monthOptions}
-        value={filters.month}
-        onChange={(val) => onFilterChange({ month: val })}
-      />
-      <SelectDropdown
-        label="Tipo"
-        options={typeOptions}
-        value={filters.type}
-        onChange={(val) => onFilterChange({ type: val })}
-      />
+      <SelectDropdown label="Ano" options={yearOptions} value={filters.year} onChange={(val) => onFilterChange({ year: val })} />
+      <SelectDropdown label="Mês" options={monthOptions} value={filters.month} onChange={(val) => onFilterChange({ month: val })} />
+      <SelectDropdown label="Tipo" options={typeOptions} value={filters.type} onChange={(val) => onFilterChange({ type: val })} />
+      <SelectDropdown label="Conta" options={accountOptions} value={filters.account} onChange={(val) => onFilterChange({ account: val })} />
+      <SelectDropdown label="Indústria" options={industryOptions} value={filters.industry} onChange={(val) => onFilterChange({ industry: val })} />
+      <SelectDropdown label="Estado" options={stateOptions} value={filters.state} onChange={(val) => onFilterChange({ state: val })} />
     </FilterContainer>
   );
 };

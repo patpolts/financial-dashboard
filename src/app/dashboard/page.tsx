@@ -1,4 +1,4 @@
-import { getAuthSession } from "@libs/auth";
+import { getAuthSession } from "@libs/auth/session";
 import { redirect } from "next/navigation";
 import { loadTransactions } from "@libs/loadTransactions";
 import DashboardContent from "./DashboardContent";

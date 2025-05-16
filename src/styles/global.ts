@@ -13,13 +13,14 @@ export const GlobalStyle = createGlobalStyle`
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
       Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     transition: background-color 0.3s ease, color 0.3s ease;
-    position: relative;
-    min-height: 100vh;
     overflow-x: hidden;
   }
 
   a {
     color: ${({ theme }) => theme.colors.primary};
     text-decoration: none;
+  }
+  h2,h3,h4{
+    color: ${({ theme }) => theme.colors.secondary};
   }
 `;

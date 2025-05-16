@@ -4,27 +4,27 @@ export const lightTheme: DefaultTheme = {
   colors: {
     background: '#fff',
     text: '#111',
-    primary: '#52a9ff',
-    secondary: '#3b82f6',
+    primary: '#efb956',
+    secondary: '#3c3933',
     buttonText: '#fff',
     surface: '#f9fafb',
     border: '#e2e8f0',
     header: {
       background: '#f8fafc',
-      text: '#111'
+      text: '#422c03'
     },
     footer: {
       background: '#f1f5f9',
-      text: '#111'
+      text: '#422c03'
     },
     sidebar: {
       background: '#f1f5f9',
       text: '#1e293b'
     },
     card: {
-      background: '#ededed',
-      title: '#111',
-      text: '#3b8148'
+      background: '#fffcf7',
+      title: '#422c03',
+      text: '#8f5d02'
     }
   },
 };
@@ -33,8 +33,8 @@ export const darkTheme: DefaultTheme = {
   colors: {
     background: '#0f172a',
     text: '#f8fafc',
-    primary: '#3b82f6',
-    secondary: '#60a5fa',
+    primary: '#483002',
+    secondary: '#d7bf90',
     buttonText: '#fff',
     surface: '#1e293b',
     border: '#334155',

@@ -29,12 +29,20 @@ import {
   FiPieChart,
 } from 'react-icons/fi';
 import { format } from 'date-fns';
+import { FiltersType } from 'types/filter';
 
 const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff8042', '#a4de6c', '#d0ed57', '#8dd1e1'];
 
-const GridLayout = styled.div`
+const GridLayoutCharts = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+`;
+
+const GridLayout = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1rem;
   margin-bottom: 2rem;
 `;
@@ -77,7 +85,14 @@ function formatCurrency(value: number) {
 }
 
 export default function DashboardContent({ transactions }: { transactions: Transaction[] }) {
-  const [filters, setFilters] = useState({ year: 'all', month: 'all', type: 'all' });
+  const [filters, setFilters] = useState<FiltersType>({
+    year: 'all',
+    month: 'all',
+    type: 'all',
+    account: 'all',
+    industry: 'all',
+    state: 'all',
+  });
 
   const filteredTransactions = useMemo(() => {
     return transactions.filter((t) => {
@@ -85,10 +100,23 @@ export default function DashboardContent({ transactions }: { transactions: Trans
       const matchesYear = filters.year !== 'all' ? d.getFullYear().toString() === filters.year : true;
       const matchesMonth = filters.month !== 'all' ? String(d.getMonth() + 1).padStart(2, '0') === filters.month : true;
       const matchesType = filters.type !== 'all' ? t.transaction_type === filters.type : true;
-      return matchesYear && matchesMonth && matchesType;
+      const matchesAccount = filters.account !== 'all' ? t.account === filters.account : true;
+      const matchesIndustry = filters.industry !== 'all' ? t.industry === filters.industry : true;
+      const matchesState = filters.state !== 'all' ? t.state === filters.state : true;
+
+      return (
+        matchesYear &&
+        matchesMonth &&
+        matchesType &&
+        matchesAccount &&
+        matchesIndustry &&
+        matchesState
+      );
     });
   }, [filters, transactions]);
 
+
+  const now = Date.now();
   const deposits = filteredTransactions.filter((x) => x.transaction_type === 'deposit');
   const withdraws = filteredTransactions.filter((x) => x.transaction_type === 'withdraw');
 
@@ -96,7 +124,8 @@ export default function DashboardContent({ transactions }: { transactions: Trans
   const withdrawSum = withdraws.reduce((sum, x) => sum + parseInt(x.amount), 0);
 
   const balance = depositSum - withdrawSum;
-  const pending = filteredTransactions.slice(-5);
+  const pendingTransactions = filteredTransactions.filter(t => new Date(t.date).getTime() > now);
+  const pendingCount = pendingTransactions.length;
   const totalTransactions = filteredTransactions.length;
   const industries = Array.from(new Set(filteredTransactions.map((x) => x.industry)));
 
@@ -151,12 +180,13 @@ export default function DashboardContent({ transactions }: { transactions: Trans
     value: total / 100,
   }));
 
+
+
   return (
     <div style={{ display: 'flex' }}>
       <Sidebar />
       <div style={{ flex: 1, padding: '2rem' }}>
         <h2>Dashboard</h2>
-
 
         <Filters
           transactions={transactions}
@@ -164,17 +194,19 @@ export default function DashboardContent({ transactions }: { transactions: Trans
           onFilterChange={(updated) => setFilters((prev) => ({ ...prev, ...updated }))}
         />
 
+        <h3>Resumo de transações</h3>
         <GridLayout>
           <Card title="Total de Transações" value={totalTransactions.toString()} icon={<FiLayers />} />
           <Card title="Indústrias" value={industries.length.toString()} icon={<FiBriefcase />} />
           <Card title="Receitas" value={formatCurrency(depositSum)} icon={<FiTrendingUp />} />
           <Card title="Despesas" value={formatCurrency(withdrawSum)} icon={<FiTrendingDown />} />
           <Card title="Saldo" value={formatCurrency(balance)} icon={<FiDollarSign />} />
+          <Card title="Pendentes" value={pendingCount.toString()} icon={<FiLayers />} />
         </GridLayout>
 
         <Section>
-          <h3>Visão geral</h3>
-          <GridLayout>
+          <h3>Gráficos de transações</h3>
+          <GridLayoutCharts>
             <ChartBox>
               <h4>Por Indústria</h4>
               <ResponsiveContainer width="100%" height="100%">
@@ -239,8 +271,9 @@ export default function DashboardContent({ transactions }: { transactions: Trans
                 </BarChart>
               </ResponsiveContainer>
             </ChartBox>
-          </GridLayout>
+          </GridLayoutCharts>
         </Section>
+
       </div>
     </div>
   );

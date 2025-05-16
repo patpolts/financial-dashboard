@@ -70,16 +70,15 @@ export default function Header({ isDark, toggleTheme }: HeaderProps) {
 
   return (
     <HeaderContainer>
-      <h1>Minhas finanças</h1>
+      <h1>Transações financeiras</h1>
       <MiddleSection>
         <ThemeToggle />
       </MiddleSection>
       <RightSection>
         {session?.user && (
           <>
-            <span>{session.user.name}</span>
+            <span>Olá, {session.user.name}</span>
             {session.user?.image && <UserAvatar src={session.user.image} alt="Avatar do usuário" />}
-            <LogoutButton onClick={() => signOut()}>Sair</LogoutButton>
           </>
         )}
 

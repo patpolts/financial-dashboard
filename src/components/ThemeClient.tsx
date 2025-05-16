@@ -11,6 +11,12 @@ import { ThemeContext } from '@context/ThemeContext';
 
 export function ThemeClient({ children, serverTheme }: { children: React.ReactNode; serverTheme: string }) {
   const [isDark, setIsDark] = useState(serverTheme === 'dark');
+  const [isHydrated, setIsHydrated] = useState(false);
+  const { data: session, status } = useSession();
+
+   useEffect(() => {
+    setIsHydrated(true);
+  }, []);
 
   useEffect(() => {
     document.cookie = `theme=${isDark ? 'dark' : 'light'}; path=/`;
@@ -18,8 +24,9 @@ export function ThemeClient({ children, serverTheme }: { children: React.ReactNo
 
   const toggleTheme = () => setIsDark(prev => !prev);
 
+  if(!isHydrated) return null;
+
   const themeObject = isDark ? darkTheme : lightTheme;
-  const { data: session, status } = useSession();
   const isAuthenticated = status === 'authenticated' && !!session?.user;
 
   return (

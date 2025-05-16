@@ -1,8 +1,9 @@
 'use client';
 
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
 import { SessionProvider } from 'next-auth/react';
 import { ThemeClient } from './ThemeClient';
+import { Spinner } from './ui/Spinner';
 
 interface ProvidersProps {
   children: ReactNode;
@@ -11,10 +12,12 @@ interface ProvidersProps {
 
 export default function AuthProviders({ children, serverTheme }: ProvidersProps) {
   return (
-    <SessionProvider>
-      <ThemeClient serverTheme={serverTheme}>
-        {children}
-      </ThemeClient>
-    </SessionProvider>
+    <Suspense fallback={<Spinner />}>
+      <SessionProvider>
+        <ThemeClient serverTheme={serverTheme}>
+          {children}
+        </ThemeClient>
+      </SessionProvider>
+    </Suspense>
   );
 }
