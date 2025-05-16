@@ -5,8 +5,15 @@ import { env } from "@libs/env";
 export const authOptions: NextAuthOptions = {
     providers: [
         GoogleProvider({
-        clientId: env.GOOGLE_CLIENT_ID,
-        clientSecret: env.GOOGLE_CLIENT_SECRET,
+            clientId: env.GOOGLE_CLIENT_ID,
+            clientSecret: env.GOOGLE_CLIENT_SECRET,
+            authorization: {
+                params: {
+                    prompt: "consent",
+                    access_type: "offline",
+                    response_type: "code",
+                },
+            },
         }),
     ],
     callbacks: {
@@ -24,7 +31,7 @@ export const authOptions: NextAuthOptions = {
             return session;
         },
     },
-    secret: env.NEXT_AUTH_SECRET,
+    secret: env.NEXTAUTH_SECRET,
 };
 
 const authHandler = NextAuth(authOptions);

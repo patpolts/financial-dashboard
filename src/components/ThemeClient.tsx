@@ -28,7 +28,7 @@ export function ThemeClient({ children, serverTheme }: { children: React.ReactNo
         <GlobalStyle />
         {isAuthenticated && <Header isDark={isDark} toggleTheme={toggleTheme} />}
         <main>{children}</main>
-        <Footer />
+        {isAuthenticated && <Footer />}
       </ThemeProvider>
     </ThemeContext.Provider>
   );
