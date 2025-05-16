@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📊 Financial Dashboard
 
-## Getting Started
+**Financial Dashboard** is a web application built with **Next.js 15**, designed for visualizing and exploring financial transaction data through interactive charts, filters, and a clean table interface.
 
-First, run the development server:
+---
+
+## 🚀 Features
+
+- ✅ Built with **Next.js 15 App Router**
+- 🎨 Styled using **Styled Components**
+- 📊 Dashboard with dynamic charts:
+  - Industry breakdown
+  - Monthly balance
+  - State distribution
+  - Income vs Expenses
+- 🔍 Powerful filtering:
+  - Year, Month, Transaction Type
+  - Account, Industry, State
+- 📄 Paginated, responsive transaction table
+- 📁 Loads data from local JSON
+- 🧭 Collapsible sidebar with route-aware navigation
+- 🧪 Unit-tested data loading logic with Jest
+
+---
+
+## 🧰 Tech Stack
+
+- **Framework:** Next.js 15
+- **Language:** TypeScript
+- **Styling:** Styled Components
+- **UI Components:** Radix UI
+- **Icons:** React Icons
+- **Charts:** Recharts
+- **Testing:** Jest
+
+---
+
+## ⚙️ Configuration
+
+Copy the example environment file:
+
+```bash
+cp .env_example .env
+Edit the .env file and add any necessary credentials or environment-specific variables.
+```  
+
+🧪 Running the App
+To start the development server, run:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Then open your browser and go to: http://localhost:3000
+```  
+
+✅ Running Tests
+This project includes basic unit tests for data loading (i.e. loadTransactions):
+
+```bash
+npm run test  
 ```
+Ensure test files are located in src/tests/ and named using .test.ts or .spec.ts.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🗂 Project Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+├── src/
+│   ├── app/                  # App router pages
+│   ├── components/           # UI components (Sidebar, Table, etc.)
+│   ├── lib/                  # Utility functions (e.g., loadTransactions)
+│   ├── styles/               # Global and theme styles
+│   └── tests/                # Unit tests
+├── data/
+│   └── transactions.json     # Local dataset
+├── .env_example              # Environment variable template
+├── .env                      # Local environment config (created by user)
+├── README.md  
+```  
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+📝 Notes
+Transactions are loaded from a local JSON file located at data/transactions.json.
 
-## Learn More
+The sidebar's collapsed state is persisted via localStorage.
 
-To learn more about Next.js, take a look at the following resources:
+This is a client-rendered dashboard — no backend/server-side API.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The UI uses accessible components provided by Radix UI.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Charts are responsive and built with Recharts.
