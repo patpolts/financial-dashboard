@@ -8,7 +8,7 @@ const SidebarContent = styled(NavigationMenu.Root)`
     position: relative;
     width: 200px;
     background-color: ${({ theme }) => theme.colors.sidebar.background};
-    color: white;
+    color: ${({ theme }) => theme.colors.sidebar.text};
     height: 100vh;
     padding: 2rem 1rem;
     display: flex;

@@ -22,7 +22,7 @@ const FilterBlock = styled.div`
 const Label = styled.label`
   margin-bottom: 4px;
   font-size: 14px;
-  color: #333;
+  color: ${({ theme }) => theme.colors.secondary};
 `;
 
 // Radix Styled

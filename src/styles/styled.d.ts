@@ -1,7 +1,23 @@
 import 'styled-components';
 
-interface sidebarOptions{
+interface SidebarOptions {
   background: string;
+  text: string;
+}
+
+interface HeaderFooterOptions {
+  background: string;
+  text: string;
+}
+
+interface SidebarOptions{
+  background: string;
+  text: string;
+}
+
+interface CardOptions{
+  background: string;
+  title: string;
   text: string;
 }
 
@@ -14,7 +30,11 @@ declare module 'styled-components' {
       secondary: string;
       buttonText: string;
       surface: string;
-      sidebar: sidebarOptions;
+      border: string;
+      header: HeaderFooterOptions;
+      footer: HeaderFooterOptions;
+      sidebar: SidebarOptions;
+      card: CardOptions;
     };
   }
 }

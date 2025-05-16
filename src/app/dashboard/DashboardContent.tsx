@@ -20,6 +20,14 @@ import {
   Cell,
   Legend,
 } from 'recharts';
+import {
+  FiTrendingUp,
+  FiTrendingDown,
+  FiLayers,
+  FiBriefcase,
+  FiDollarSign,
+  FiPieChart,
+} from 'react-icons/fi';
 import { format } from 'date-fns';
 
 const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff8042', '#a4de6c', '#d0ed57', '#8dd1e1'];
@@ -148,7 +156,7 @@ export default function DashboardContent({ transactions }: { transactions: Trans
       <Sidebar />
       <div style={{ flex: 1, padding: '2rem' }}>
         <h2>Dashboard</h2>
-        
+
 
         <Filters
           transactions={transactions}
@@ -157,11 +165,11 @@ export default function DashboardContent({ transactions }: { transactions: Trans
         />
 
         <GridLayout>
-          <Card title="Total de Transações" value={totalTransactions.toString()} />
-          <Card title="Indústrias" value={industries.length.toString()} />
-          <Card title="Receitas" value={formatCurrency(depositSum)} />
-          <Card title="Despesas" value={formatCurrency(withdrawSum)} />
-          <Card title="Saldo" value={formatCurrency(balance)} />
+          <Card title="Total de Transações" value={totalTransactions.toString()} icon={<FiLayers />} />
+          <Card title="Indústrias" value={industries.length.toString()} icon={<FiBriefcase />} />
+          <Card title="Receitas" value={formatCurrency(depositSum)} icon={<FiTrendingUp />} />
+          <Card title="Despesas" value={formatCurrency(withdrawSum)} icon={<FiTrendingDown />} />
+          <Card title="Saldo" value={formatCurrency(balance)} icon={<FiDollarSign />} />
         </GridLayout>
 
         <Section>

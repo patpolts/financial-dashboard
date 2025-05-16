@@ -4,8 +4,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const FooterContainer = styled.footer`
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: white;
+  background-color: ${({ theme }) => theme.colors.footer.background};
+  color: ${({ theme }) => theme.colors.footer.text};
   padding: 1rem 2rem;
   text-align: center;
   position: relative;
