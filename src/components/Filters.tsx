@@ -5,6 +5,31 @@ import { ChevronDownIcon } from '@radix-ui/react-icons';
 import styled from 'styled-components';
 import { Transaction } from 'types/transaction';
 import type { FiltersType } from 'types/filter';
+import { Cross1Icon } from '@radix-ui/react-icons'; 
+
+const ClearButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  background-color: ${({ theme }) => theme.colors.primary || '#4f46e5'};
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  height: 35px;
+  margin: 1.4rem 0 0 0;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.secondary || '#4338ca'};
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.3);
+  }
+`;
 
 const FilterContainer = styled.div`
   display: flex;
@@ -79,10 +104,12 @@ export const Filters = ({
   transactions,
   filters,
   onFilterChange,
+  onClearFilters,
 }: {
   transactions: Transaction[];
   filters: FiltersType;
   onFilterChange: (filter: Partial<FiltersType>) => void;
+  onClearFilters: () => void;
 }) => {
   const years = Array.from(new Set(transactions.map((t) => new Date(t.date).getFullYear())))
     .sort()
@@ -127,6 +154,11 @@ export const Filters = ({
       <SelectDropdown label="Conta" options={accountOptions} value={filters.account} onChange={(val) => onFilterChange({ account: val })} />
       <SelectDropdown label="Indústria" options={industryOptions} value={filters.industry} onChange={(val) => onFilterChange({ industry: val })} />
       <SelectDropdown label="Estado" options={stateOptions} value={filters.state} onChange={(val) => onFilterChange({ state: val })} />
+      
+      <ClearButton onClick={onClearFilters} title='Limpar filtros'>
+        <Cross1Icon />
+      </ClearButton>
+
     </FilterContainer>
   );
 };

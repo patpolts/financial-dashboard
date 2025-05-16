@@ -19,6 +19,12 @@ const HeaderContainer = styled.header`
   justify-content: space-between;
   align-items: center;
 `;
+const LeftSection = styled.div`
+  display: flex;
+  align-items: left;
+  gap: 1rem;
+  font-size: 1rem;
+`;
 const MiddleSection = styled.div`
   display: flex;
   align-items: center;
@@ -29,6 +35,7 @@ const RightSection = styled.div`
   display: flex;
   align-items: right;
   gap: 1rem;
+  font-size: 1rem;
 `;
 
 const UserAvatar = styled.img`
@@ -70,14 +77,16 @@ export default function Header({ isDark, toggleTheme }: HeaderProps) {
 
   return (
     <HeaderContainer>
-      <h1>Transações financeiras</h1>
+      <LeftSection>
+      <h1>Painel financeiro</h1>
+      </LeftSection>
       <MiddleSection>
         <ThemeToggle />
       </MiddleSection>
       <RightSection>
         {session?.user && (
           <>
-            <span>Olá, {session.user.name}</span>
+            <span style={{fontSize: '.8rem', paddingTop: '.4rem'}} >Olá, {session.user.name}</span>
             {session.user?.image && <UserAvatar src={session.user.image} alt="Avatar do usuário" />}
           </>
         )}

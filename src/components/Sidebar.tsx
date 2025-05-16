@@ -4,7 +4,8 @@ import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import styled from 'styled-components';
 import { LogoutButton } from './LogoutButton';
 import { useEffect, useState } from 'react';
-import { FiHome, FiLogOut, FiChevronRight, FiChevronLeft } from 'react-icons/fi';
+import { FiHome, FiLogOut, FiChevronRight, FiChevronLeft, FiPieChart  } from 'react-icons/fi';
+import { usePathname } from 'next/navigation';
 
 const SidebarWrapper = styled.div<{ $collapsed: boolean }>`
   position: relative;
@@ -69,6 +70,12 @@ const LogoutButtonStyled = styled(LogoutButton) <{ $collapsed: boolean }>`
 
 export default function Sidebar() {
     const [collapsed, setCollapsed] = useState<boolean | null>(null);
+    const pathname = usePathname();
+
+    const isHome = pathname === '/';
+    const itemLink = isHome ? '/dashboard' : '/';
+    const itemLabel = isHome ? 'Dashboard' : 'Home';
+    const ItemIcon = isHome ? FiPieChart : FiHome;
 
     useEffect(() => {
         const saved = localStorage.getItem('sidebar-collapsed');
@@ -91,9 +98,9 @@ export default function Sidebar() {
                 {collapsed ? <FiChevronRight /> : <FiChevronLeft />}
             </ToggleButton>
 
-            <NavItem href="/" $collapsed={collapsed} title="Home">
-                <FiHome />
-                {!collapsed && 'Home'}
+            <NavItem href={itemLink} $collapsed={collapsed} title={itemLabel}>
+                <ItemIcon />
+                {!collapsed && itemLabel}
             </NavItem>
 
             <LogoutButtonStyled $collapsed={collapsed}>

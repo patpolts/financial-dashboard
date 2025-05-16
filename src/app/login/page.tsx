@@ -8,7 +8,7 @@ export default function LoginPage() {
   return (
     <Container>
       <LoginCard>
-        <Title>Efetue o login</Title>
+        <Title>Painel Financeiro</Title>
         <GoogleButton onClick={() => signIn('google', { callbackUrl: '/dashboard' })}  />
       </LoginCard>
     </Container>

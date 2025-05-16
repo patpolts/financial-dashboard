@@ -20,7 +20,9 @@ export const GlobalStyle = createGlobalStyle`
     color: ${({ theme }) => theme.colors.primary};
     text-decoration: none;
   }
-  h2,h3,h4{
+  h1,h2,h3,h4{
+    margin:0 auto;
     color: ${({ theme }) => theme.colors.secondary};
+    text-align: left;
   }
 `;

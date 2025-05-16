@@ -1,15 +1,19 @@
-import { redirect } from 'next/navigation';
-import { getAuthSession } from '@libs/auth/session';
+import { loadTransactions } from '@libs/loadTransactions';
+import TransactionsTable from '@components/TransactionsTable';
+import Sidebar from '@components/Sidebar';
 
-export default async function HomePage() {
-  const session = await getAuthSession();
+const ITEMS_PER_PAGE = 50;
 
-  if (session?.user) {
-    redirect('/dashboard');
+export default async function Home() {
+  const transactions = await loadTransactions();
 
-  } else {
-    redirect('/login');
-
-  }
-
+  return (
+    <div style={{ display: 'flex' }}>
+      <Sidebar />
+      <div style={{ flex: 1, padding: '2rem' }}>
+        <h2>Transações</h2>
+        <TransactionsTable transactions={transactions} itemsPerPage={ITEMS_PER_PAGE} />
+      </div>
+    </div>
+  );
 }

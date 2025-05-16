@@ -94,6 +94,17 @@ export default function DashboardContent({ transactions }: { transactions: Trans
     state: 'all',
   });
 
+  const clearFilters = () => {
+    setFilters({
+      year: 'all',
+      month: 'all',
+      type: 'all',
+      account: 'all',
+      industry: 'all',
+      state: 'all',
+    });
+  };
+
   const filteredTransactions = useMemo(() => {
     return transactions.filter((t) => {
       const d = new Date(t.date);
@@ -191,8 +202,8 @@ export default function DashboardContent({ transactions }: { transactions: Trans
         <Filters
           transactions={transactions}
           filters={filters}
-          onFilterChange={(updated) => setFilters((prev) => ({ ...prev, ...updated }))}
-        />
+          onFilterChange={(updated) => setFilters((prev) => ({ ...prev, ...updated }))} 
+          onClearFilters={clearFilters} />
 
         <h3>Resumo de transações</h3>
         <GridLayout>
