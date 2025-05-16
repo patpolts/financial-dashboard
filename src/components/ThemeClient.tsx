@@ -1,38 +1,35 @@
 'use client';
 
 import { ThemeProvider } from 'styled-components';
-import { ReactNode, useEffect, useState } from 'react';
-import { lightTheme, darkTheme } from '@styles/themes';
 import { GlobalStyle } from '@styles/global';
+import { lightTheme, darkTheme } from '@styles/themes';
+import { useState, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
 import Header from './Header';
 import Footer from './Footer';
+import { ThemeContext } from '@context/ThemeContext';
 
-interface ThemeClientProps {
-  children: ReactNode;
-}
-
-export function ThemeClient({ children }: ThemeClientProps) {
-  const [isDark, setIsDark] = useState(false);
+export function ThemeClient({ children, serverTheme }: { children: React.ReactNode; serverTheme: string }) {
+  const [isDark, setIsDark] = useState(serverTheme === 'dark');
 
   useEffect(() => {
-    const stored = localStorage.getItem('theme');
-    setIsDark(stored === 'dark');
-  }, []);
+    document.cookie = `theme=${isDark ? 'dark' : 'light'}; path=/`;
+  }, [isDark]);
 
-  const toggleTheme = () => {
-    setIsDark(prev => {
-      const newTheme = !prev;
-      localStorage.setItem('theme', newTheme ? 'dark' : 'light');
-      return newTheme;
-    });
-  };
+  const toggleTheme = () => setIsDark(prev => !prev);
+
+  const themeObject = isDark ? darkTheme : lightTheme;
+  const { data: session, status } = useSession();
+  const isAuthenticated = status === 'authenticated' && !!session?.user;
 
   return (
-    <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-      <GlobalStyle />
-      <Header isDark={isDark} toggleTheme={toggleTheme} />
-      <main>{children}</main>
-      <Footer />
-    </ThemeProvider>
+    <ThemeContext.Provider value={{ isDark, toggleTheme }}>
+      <ThemeProvider theme={themeObject}>
+        <GlobalStyle />
+        {isAuthenticated && <Header isDark={isDark} toggleTheme={toggleTheme} />}
+        <main>{children}</main>
+        {isAuthenticated && <Footer />}
+      </ThemeProvider>
+    </ThemeContext.Provider>
   );
 }

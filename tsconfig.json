@@ -24,18 +24,11 @@
     ],
     "baseUrl": "./src/",
     "paths": {
-      "@libs/*": [
-        "lib/*"
-      ],
-      "@styles/*": [
-        "styles/*"
-      ],
-      "@components/*": [
-        "components/*"
-      ],
-      "@context/*": [
-        "context/*"
-      ]
+      "@app/*": [ "app/*"],
+      "@libs/*": ["lib/*"],
+      "@styles/*": ["styles/*"],
+      "@components/*": ["components/*"],
+      "@context/*": [ "context/*"]
     }
   },
   "include": [
@@ -46,5 +39,9 @@
   ],
   "exclude": [
     "node_modules"
+  ],
+  "typeRoots": [
+    "./node_modules/@types",
+    "./src/types"
   ]
 }

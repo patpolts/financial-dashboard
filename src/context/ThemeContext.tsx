@@ -1,42 +1,15 @@
-// src/context/ThemeContext.tsx
-'use client'
+'use client';
 
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext } from 'react';
 
-type ThemeType = 'light' | 'dark'
-
-interface ThemeContextProps {
-  theme: ThemeType
-  toggleTheme: () => void
+interface ThemeContextType {
+  isDark: boolean;
+  toggleTheme: () => void;
 }
 
-const ThemeContext = createContext<ThemeContextProps | undefined>(undefined)
+export const ThemeContext = createContext<ThemeContextType>({
+  isDark: false,
+  toggleTheme: () => {},
+});
 
-export const ThemeProviderContext = ({ children }: { children: React.ReactNode }) => {
-  const [theme, setTheme] = useState<ThemeType>(() => {
-    if (typeof window !== 'undefined') {
-      return (localStorage.getItem('theme') as ThemeType) || 'light'
-    }
-    return 'light'
-  })
-
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light'
-    setTheme(newTheme)
-    localStorage.setItem('theme', newTheme)
-  }
-
-  return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  )
-}
-
-export const useTheme = () => {
-  const context = useContext(ThemeContext)
-  if (!context) {
-    throw new Error('useTheme must be used within a ThemeProviderContext')
-  }
-  return context
-}
+export const useThemeContext = () => useContext(ThemeContext);
