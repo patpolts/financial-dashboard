@@ -42,17 +42,22 @@ Copy the example environment file:
 ```bash
 cp .env_example .env
 Edit the .env file and add any necessary credentials or environment-specific variables.
+```  
 
 🧪 Running the App
 To start the development server, run:
 
+```bash
 npm run dev
 Then open your browser and go to: http://localhost:3000
+```  
 
 ✅ Running Tests
 This project includes basic unit tests for data loading (i.e. loadTransactions):
 
-npm run test
+```bash
+npm run test  
+```
 Ensure test files are located in src/tests/ and named using .test.ts or .spec.ts.
 
 🗂 Project Structure
@@ -67,7 +72,8 @@ Ensure test files are located in src/tests/ and named using .test.ts or .spec.ts
 │   └── transactions.json     # Local dataset
 ├── .env_example              # Environment variable template
 ├── .env                      # Local environment config (created by user)
-├── README.md
+├── README.md  
+
 📝 Notes
 Transactions are loaded from a local JSON file located at data/transactions.json.
 
