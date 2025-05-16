@@ -3,6 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ThemeSwitch } from './ui/ThemeSwitch';
+import {useSession, signOut} from 'next-auth/react';
 
 interface HeaderProps {
   isDark: boolean;
@@ -16,6 +17,32 @@ const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+const RightSection = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+
+const UserAvatar = styled.img`
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+`;
+
+const LogoutButton = styled.button`
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background: white;
+    color: ${({ theme }) => theme.colors.primary};
+  }
 `;
 
 const Button = styled.button`
@@ -33,10 +60,23 @@ const Button = styled.button`
 `;
 
 export default function Header({ isDark, toggleTheme }: HeaderProps) {
+  const {data: session} = useSession();
+
   return (
     <HeaderContainer>
-      <h1>Dashboard Financeiro</h1>
-      <ThemeSwitch checked={isDark} onCheckedChange={toggleTheme} />
+      <h1>Minhas finanças</h1>
+      <RightSection>
+        <ThemeSwitch checked={isDark} onCheckedChange={toggleTheme} />
+        {session?.user && (
+          <>
+            <span>{session.user.name}</span>
+            {session.user?.image && <UserAvatar src={session.user.image} alt="Avatar do usuário" />}
+            <LogoutButton onClick={() => signOut()}>Sair</LogoutButton>
+          </>
+        )}
+
+      </RightSection>
     </HeaderContainer>
   );
+
 }

@@ -8,9 +8,10 @@ const FooterContainer = styled.footer`
   color: white;
   padding: 1rem 2rem;
   text-align: center;
-  position: absolute;
+  position: relative;
   bottom: 0px;
   width: 100vw;
+  height: 60px;
 `;
 
 export default function Footer() {

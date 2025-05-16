@@ -1,14 +1,13 @@
 import { getAuthSession } from "@libs/auth";
 import { redirect } from "next/navigation";
+import { loadTransactions } from "@libs/loadTransactions";
+import DashboardContent from "./DashboardContent";
 
 export default async function DashboardPage() {
-    const session = await getAuthSession();
+  const session = await getAuthSession();
+  if (!session?.user) redirect("/login");
 
-    if (!session?.user) redirect('/login');
+  const transactions = await loadTransactions();
 
-    return (
-        <main>
-            <h1>Bem-vindo, {session.user.name}!</h1>
-        </main>
-    )
+  return <DashboardContent transactions={transactions} />;
 }
