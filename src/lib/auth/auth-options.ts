@@ -1,3 +1,4 @@
+// src/lib/auth/authOptions.ts
 import { NextAuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import { env } from '@libs/env';
@@ -16,7 +17,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id;  
+        token.id = user.id;
         token.name = user.name;
         token.email = user.email;
         token.picture = user.image;
