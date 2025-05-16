@@ -22,7 +22,7 @@
         "name": "next"
       }
     ],
-    "baseUrl": "./src/",
+    "baseUrl": "src",
     "paths": {
       "@app/*": [ "app/*"],
       "@libs/*": ["lib/*"],
