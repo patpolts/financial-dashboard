@@ -1,42 +1,80 @@
-# Financial Dashboard
+# 📊 Financial Dashboard
 
-Financial Dashboard is a Next.js 15 application for visualizing and managing financial transactions, featuring charts, filters, and a user-friendly interface.
-
----
-
-## Features
-
-- Dashboard with charts for industry, monthly balance, states, and income vs expenses
-- Filters for year, month, transaction type, account, industry, and state
-- Sidebar navigation with collapse functionality
-- Simple pagination on transactions table
-- Styled components for clean UI
-- Data loaded from local JSON (`./data/transactions.json`)
-- Unit tests for core data loading logic  
-- Login via google login
+**Financial Dashboard** is a web application built with **Next.js 15**, designed for visualizing and exploring financial transaction data through interactive charts, filters, and a clean table interface.
 
 ---
 
-## Tech Stack
+## 🚀 Features
 
-- Next.js 15 
-- React (with hooks)
-- Styled Components
-- Recharts (charts)
-- Radix UI (for accessible components)
-- Jest (for testing)
-- TypeScript
+- ✅ Built with **Next.js 15 App Router**
+- 🎨 Styled using **Styled Components**
+- 📊 Dashboard with dynamic charts:
+  - Industry breakdown
+  - Monthly balance
+  - State distribution
+  - Income vs Expenses
+- 🔍 Powerful filtering:
+  - Year, Month, Transaction Type
+  - Account, Industry, State
+- 📄 Paginated, responsive transaction table
+- 📁 Loads data from local JSON
+- 🧭 Collapsible sidebar with route-aware navigation
+- 🧪 Unit-tested data loading logic with Jest
 
 ---
 
-## Setup & Installation
+## 🧰 Tech Stack
 
-1. **Clone the repository and checkout the `develop` branch**
+- **Framework:** Next.js 15
+- **Language:** TypeScript
+- **Styling:** Styled Components
+- **UI Components:** Radix UI
+- **Icons:** React Icons
+- **Charts:** Recharts
+- **Testing:** Jest
+
+---
+
+## ⚙️ Configuration
+
+Copy the example environment file:
 
 ```bash
-git clone https://github.com/patpolts/financial-dashboard.git
-cd financial-dashboard
-npm install  
-git flow init  
-mv .env_example .env  #add google credentials and next secret
+cp .env_example .env
+Edit the .env file and add any necessary credentials or environment-specific variables.
+
+🧪 Running the App
+To start the development server, run:
+
 npm run dev
+Then open your browser and go to: http://localhost:3000
+
+✅ Running Tests
+This project includes basic unit tests for data loading (i.e. loadTransactions):
+
+npm run test
+Ensure test files are located in src/tests/ and named using .test.ts or .spec.ts.
+
+🗂 Project Structure
+.
+├── src/
+│   ├── app/                  # App router pages
+│   ├── components/           # UI components (Sidebar, Table, etc.)
+│   ├── lib/                  # Utility functions (e.g., loadTransactions)
+│   ├── styles/               # Global and theme styles
+│   └── tests/                # Unit tests
+├── data/
+│   └── transactions.json     # Local dataset
+├── .env_example              # Environment variable template
+├── .env                      # Local environment config (created by user)
+├── README.md
+📝 Notes
+Transactions are loaded from a local JSON file located at data/transactions.json.
+
+The sidebar's collapsed state is persisted via localStorage.
+
+This is a client-rendered dashboard — no backend/server-side API.
+
+The UI uses accessible components provided by Radix UI.
+
+Charts are responsive and built with Recharts.

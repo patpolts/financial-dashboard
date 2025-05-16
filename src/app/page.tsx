@@ -1,10 +1,15 @@
+import { getAuthSession } from "@libs/auth/session";
 import { loadTransactions } from '@libs/loadTransactions';
+import { redirect } from "next/navigation";
 import TransactionsTable from '@components/TransactionsTable';
 import Sidebar from '@components/Sidebar';
 
 const ITEMS_PER_PAGE = 50;
 
 export default async function Home() {
+  const session = await getAuthSession();
+  if (!session?.user) redirect("/login");
+
   const transactions = await loadTransactions();
 
   return (
