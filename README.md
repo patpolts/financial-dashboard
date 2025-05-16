@@ -61,7 +61,8 @@ npm run test
 Ensure test files are located in src/tests/ and named using .test.ts or .spec.ts.
 
 🗂 Project Structure
-.
+
+```bash
 ├── src/
 │   ├── app/                  # App router pages
 │   ├── components/           # UI components (Sidebar, Table, etc.)
@@ -73,6 +74,7 @@ Ensure test files are located in src/tests/ and named using .test.ts or .spec.ts
 ├── .env_example              # Environment variable template
 ├── .env                      # Local environment config (created by user)
 ├── README.md  
+```  
 
 📝 Notes
 Transactions are loaded from a local JSON file located at data/transactions.json.
