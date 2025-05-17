@@ -23,6 +23,11 @@ interface CardOptions{
 
 declare module 'styled-components' {
   export interface DefaultTheme {
+    breakpoints: {
+      mobile: string;
+      tablet: string;
+      desktop: string;
+    };
     colors: {
       background: string;
       text: string;
