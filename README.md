@@ -1,88 +1,115 @@
-# 📊 Financial Dashboard
+# 💰 Financial Dashboard
 
-**Financial Dashboard** is a web application built with **Next.js 15**, designed for visualizing and exploring financial transaction data through interactive charts, filters, and a clean table interface.
-
----
-
-## 🚀 Features
-
-- ✅ Built with **Next.js 15 App Router**
-- 🎨 Styled using **Styled Components**
-- 📊 Dashboard with dynamic charts:
-  - Industry breakdown
-  - Monthly balance
-  - State distribution
-  - Income vs Expenses
-- 🔍 Powerful filtering:
-  - Year, Month, Transaction Type
-  - Account, Industry, State
-- 📄 Paginated, responsive transaction table
-- 📁 Loads data from local JSON
-- 🧭 Collapsible sidebar with route-aware navigation
-- 🧪 Unit-tested data loading logic with Jest
+A sample web application developed as part of a technical challenge, designed to demonstrate modern full-stack development practices. This project allows users to manage and visualize personal financial transactions using mock data sourced from ./data/transactions.json. It leverages Next.js App Router, NextAuth.js for Google authentication, and TypeScript for strong type safety.
 
 ---
 
-## 🧰 Tech Stack
+## 🔍 Features
 
-- **Framework:** Next.js 15
-- **Language:** TypeScript
-- **Styling:** Styled Components
-- **UI Components:** Radix UI
-- **Icons:** React Icons
-- **Charts:** Recharts
-- **Testing:** Jest
+- 🔐 Google OAuth2 authentication with NextAuth.js
+- 📊 Dashboard for viewing and filtering financial transactions
+- 💾 Server-side transaction loading with secure session validation
+- 🎨 Styled with Styled Components and Radix UI primitives
+- 📁 App Router (Next.js 15) structure
+- 📦 Lightweight and optimized for performance
 
 ---
 
-## ⚙️ Configuration
+## 🛠️ Tech Stack
 
-Copy the example environment file:
+- **Framework**: [Next.js 15 (App Router)](https://nextjs.org/)
+- **Auth**: [NextAuth.js](https://next-auth.js.org/)
+- **Tests**: [Jests](https://jestjs.io/)  
+- **Styling**: [Styled Components](https://styled-components.com/), [Radix UI](https://www.radix-ui.com/)  
+- **Language**: TypeScript
+- **Icons**: React Icons (Google logo)
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
 
 ```bash
-cp .env_example .env
-Edit the .env file and add any necessary credentials or environment-specific variables.
+git clone https://github.com/patpolts/financial-dashboard.git
+cd financial-dashboard
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+# or
+yarn install
+```
+
+### 3. Set up environment variables
+
+Copy `env_example` to `.env`  
+```bash  
+cp env_example .env  
 ```  
 
-🧪 Running the App
-To start the development server, run:
+and add the following:
+
+```env
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+NEXTAUTH_SECRET=your-secret-key
+NEXTAUTH_URL=local next url
+```
+
+You can generate `NEXTAUTH_SECRET` using:
+
+```bash
+openssl rand -base64 32
+```
+
+### 4. Run the development server
 
 ```bash
 npm run dev
-Then open your browser and go to: http://localhost:3000
+# or
+yarn dev
 ```  
 
-✅ Running Tests
-This project includes basic unit tests for data loading (i.e. loadTransactions):
+### 5. Run tests
 
 ```bash
-npm run test  
+npm run test
+# or
+yarn test
 ```
-Ensure test files are located in src/tests/ and named using .test.ts or .spec.ts.
 
-🗂 Project Structure
+Visit [http://localhost:3000](http://localhost:3000) to view the app.
 
-```bash
-├── src/
-│   ├── app/                  # App router pages
-│   ├── components/           # UI components (Sidebar, Table, etc.)
-│   ├── lib/                  # Utility functions (e.g., loadTransactions)
-│   ├── styles/               # Global and theme styles
-│   └── tests/                # Unit tests
-├── data/
-│   └── transactions.json     # Local dataset
-├── .env_example              # Environment variable template
-├── .env                      # Local environment config (created by user)
-├── README.md  
-```  
+---
 
-📝 Notes
-Transactions are loaded from a local JSON file located at data/transactions.json.
+## 📁 Project Structure
 
-The sidebar's collapsed state is persisted via localStorage.
+```
+src/
+├── app/                # App Router structure (Next.js 13+)
+│   ├── login/          # Public login page
+│   ├── dashboard/      # Authenticated dashboard
+│   └── api/            # API routes
+│       └── auth/
+│           ├── [...nextauth]/  # NextAuth handler
+│           └── login-limit/    # Rate limiting endpoint (optional)
+├── components/         # Reusable UI components
+├── libs/               # Auth/session utilities, helpers
+├── styles/             # Styled Components & theme setup
+```
 
-This is a client-rendered dashboard — no backend/server-side API.
+---
 
-The UI uses accessible components provided by Radix UI.
+## 👤 Author
 
-Charts are responsive and built with Recharts.
+- **Patricia Poltts**  
+[LinkedIn](https://www.linkedin.com/in/poltts/) • [GitHub](https://github.com/patpolts)
+
+---
+
+## 📝 License
+
+This project is open-source and available under the [MIT License](LICENSE).
