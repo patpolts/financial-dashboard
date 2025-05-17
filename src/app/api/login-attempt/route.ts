@@ -6,7 +6,7 @@ import { authOptions } from '@libs/auth/auth-options';
 
 import { cookies } from 'next/headers';
 
-const MAX_ATTEMPTS = 2;
+const MAX_ATTEMPTS = 3;
 const WINDOW_MS = 10 * 60 * 1000; // 10 min
 const ATTEMPT_COOKIE = 'login_attempts';
 
