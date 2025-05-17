@@ -1,5 +1,6 @@
 import { cookies } from 'next/headers';
 import { ReactNode } from 'react';
+import { Analytics } from '@vercel/analytics/next';
 import  AuthProviders  from '@components/AuthProvider';
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
@@ -11,6 +12,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       <body>
           <AuthProviders serverTheme={theme}>
             {children}
+            <Analytics />
           </AuthProviders>
       </body>
     </html>

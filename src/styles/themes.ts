@@ -1,6 +1,12 @@
 import { DefaultTheme } from 'styled-components';
+const breakpoints = {
+  mobile: '768px',
+  tablet: '1024px',
+  desktop: '1200px',
+};
 
 export const lightTheme: DefaultTheme = {
+  breakpoints,
   colors: {
     background: '#fff',
     text: '#111',
@@ -30,6 +36,7 @@ export const lightTheme: DefaultTheme = {
 };
 
 export const darkTheme: DefaultTheme = {
+  breakpoints,
   colors: {
     background: '#0f172a',
     text: '#f8fafc',

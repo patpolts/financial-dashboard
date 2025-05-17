@@ -155,7 +155,7 @@ export const Filters = ({
       <SelectDropdown label="Indústria" options={industryOptions} value={filters.industry} onChange={(val) => onFilterChange({ industry: val })} />
       <SelectDropdown label="Estado" options={stateOptions} value={filters.state} onChange={(val) => onFilterChange({ state: val })} />
       
-      <ClearButton onClick={onClearFilters} title='Limpar filtros'>
+      <ClearButton onClick={onClearFilters} title='Limpar filtros'  aria-label="Limpar filtros">
         <Cross1Icon />
       </ClearButton>
 

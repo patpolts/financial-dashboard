@@ -8,16 +8,39 @@ const FooterContainer = styled.footer`
   color: ${({ theme }) => theme.colors.footer.text};
   padding: 1rem 2rem;
   text-align: center;
-  position: relative;
-  bottom: 0px;
+  width: 100%;
+  height: auto;
+  box-sizing: content-box;
+
+   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    padding: 0.5rem 1rem;
+    min-width: 100%; 
+  }
+`;
+
+
+const Copright = styled.p`
+  font-size: 1rem;
+  color: ${({ theme }) => theme.colors.footer.text};
+  margin: .5rem auto;
   width: 100vw;
-  height: 60px;
+  text-align: center;
+
+   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
 `;
 
 export default function Footer() {
   return (
     <FooterContainer>
-      © {new Date().getFullYear()} Dashboard Financeiro. Todos os direitos reservados.
+      <Copright>
+      © {new Date().getFullYear()} Painel Financeiro. Todos os direitos reservados. &nbsp;
+        <a href="https://poltts.com.br" target="_blank" rel="noopener noreferrer">
+          poltts
+        </a>
+      </Copright>
     </FooterContainer>
   );
 }

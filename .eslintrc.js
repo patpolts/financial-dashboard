@@ -14,12 +14,12 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
-    'next/core-web-vitals', // 👈 importante para Next.js
+    'next/core-web-vitals',
   ],
   rules: {
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
     '@typescript-eslint/explicit-function-return-type': 'off',
-    'react/react-in-jsx-scope': 'off', // desnecessário em Next.js
+    'react/react-in-jsx-scope': 'off', 
     'react/prop-types': 'off',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
